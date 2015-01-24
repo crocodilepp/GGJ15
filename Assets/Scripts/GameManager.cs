@@ -124,7 +124,7 @@ namespace GoingUp
 		public void MakeNpc()
 		{
 			
-			RandomPickNpc();
+			RandomPickNpc(); 
 			npc.gasType = (Gas) Random.Range(0,3);
 			Debug.LogWarning("Create A Npc !!" + npc.gasType );
 //			npcTempAvatar.GetComponent<Image>().color = theColor;
