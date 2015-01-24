@@ -28,19 +28,19 @@ public class NPC : Actor {
 			fartTime += Time.deltaTime;
 			if ( fartTime > fartTotalTime )
 			{
-				finishFart();
+				//finishFart();
 			}
 		}
 	}
 
 	public bool isFarting()
 	{
-		return isFart_;
+		return isFarting_;
 	}
 	
 	
 
-	public bool startFart( float totalTime )
+	/* bool startFart( float totalTime )
 	{
 		Debug.Log ("Start Part");
 		if (isFarting_) 
@@ -48,13 +48,13 @@ public class NPC : Actor {
 
 		}
 
-	}
+	}*/
 
-	public bool finishFart()
+	/*public bool finishFart()
 	{
 		Debug.Log ("Start Part");
 		isFarting = false;
-	}
+	}*/
 
 
 
