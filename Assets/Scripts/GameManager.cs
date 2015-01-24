@@ -43,6 +43,7 @@ namespace GoingUp
 			npcAnimator = npc.npcAnimator;
 			npcAvatar = npc.npcAvatar;
 			npcTempAvatar = npc.npcTempAvatar;
+			GameObject.Instantiate(Resources.Load("Prefabs/Fart"));
 		}
 
 		void RandomPickNpc()

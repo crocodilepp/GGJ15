@@ -59,7 +59,7 @@ public class NPC : Actor {
 		isFarting_ = true;
 		if ( onStartFart != null )
 			onStartFart (this);
-
+		GameObject.FindGameObjectWithTag("Fart").SendMessage("RandomPlay");
 	}
 
 	public void finishFart()
