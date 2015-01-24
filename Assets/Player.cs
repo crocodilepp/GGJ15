@@ -6,15 +6,32 @@ namespace GoingUp
 {
 public class Player : Actor {
 	KeyCode keyType = KeyCode.Space;
-	private	static float currentlyHp = 0;
-	private static float originalHp = 100;
 
-		private float hp_;
-		private float o2value_;
-		public  float o2LostSpeed;
+	public float hp_;
+	public float hpOriginal = 100;
+	public  float hpLsotSpeed;
+	public float o2value_;
+	public  float o2LostSpeed;
+	public float o2OriginalValue = 100;
 
-		public float HP { get { return hp_; } set { hp_ = value; } }
-		public float O2Value { get { return o2value_; } set { o2value_ = value; } }
+
+	public void initPlayerValue()
+	{
+		hp_ = hpOriginal;
+		o2value_ = o2OriginalValue;
+	}
+	
+	public float takeHpDamage(float damage)
+	{
+		hp_ -= damage;
+		if (hp_ >= 0) {
+				initPlayerValue();
+			}
+			return hp_;
+	}
+
+	
+
 
 	void Update () {
 
@@ -39,6 +56,7 @@ public class Player : Actor {
 		return onBreating;
 	}
 
+	
 
 	public void effect( NPC npc )
 	{
