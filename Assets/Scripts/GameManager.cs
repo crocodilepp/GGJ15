@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+
+using System.Linq;
+using System.Collections.Generic;
 using System.Collections;
 
 namespace GoingUp
 {
 	public class GameManager : MonoBehaviour 
 	{
-		
 		public int currentFloor;
+		public int winFloor = 101;
 		public float upTime = 5.0f;
 		public float intoTime = 1.0f;
 		public float goOutTime = 1.0f;
@@ -15,6 +18,7 @@ namespace GoingUp
 		public float doorClosingTime = 4.0f;
 		public float atFloorDingTime = 2.5f;
 		public Text floorIndexUI;
+		public List<NPC> npsList;
 		public NPC npc;
 		public Player player;
 		public Animator backGroundAnimator;
@@ -32,16 +36,17 @@ namespace GoingUp
 		
 		void Start () 
 		{
+			player.onDeath += HandleOnDeath;
 			StartCoroutine(OpenDoor());
-
+			npcAnimator = npc.npcAnimator;
+			npcAvatar = npc.npcAvatar;
+			npcTempAvatar = npc.npcTempAvatar;
 		}
-		
-		void Update () 
+
+		public void HandleOnDeath()
 		{
-			
+			gameOverText.SetActive(true);
 		}
-
-
 
 		public void UpFloor()
 		{
@@ -85,6 +90,11 @@ namespace GoingUp
 		public void AtFloor()
 		{
 			floorIndexUI.text = currentFloor.ToString();
+			if (currentFloor == winFloor)
+			{
+				gameWinText.SetActive(true);
+			}
+
 			StopCoroutine(Uping());
 			StopCoroutine(OpenDoor());
 			if(npcIsInBox)
@@ -108,7 +118,6 @@ namespace GoingUp
 		{
 			npc.gasType = (Gas) Random.Range(0,3);
 			Debug.LogWarning("Create A Npc !!" + npc.gasType );
-			
 //			npcTempAvatar.GetComponent<Image>().color = theColor;
 //			npcAvatar.GetComponent<Image>().color = theColor;
 		}

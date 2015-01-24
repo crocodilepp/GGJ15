@@ -6,14 +6,20 @@ using GoingUp;
 namespace GoingUp
 {
 public class NPC : Actor {
-		public float damage;
+
 	public delegate void FnOnStartFart( NPC npc );
 	public delegate void FnOnFinishFart( NPC npc );
 	public FnOnStartFart onStartFart;
 	public FnOnFinishFart onFinishFart;
+
+	public Animator npcAnimator;
+	public GameObject npcAvatar;
+	public GameObject npcTempAvatar;
+
 	public Gas   gasType = Gas.TypeA;
 	public float fartTotalTime = 1.0f;
 	private float fartTime = 0.0f;
+
 
 	private bool isFarting_ = false;
 	// Use this for initialization
