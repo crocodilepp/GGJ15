@@ -6,18 +6,19 @@ using GoingUp;
 namespace GoingUp
 {
 public class NPC : Actor {
-	
-	private bool isFarting_ = false;
-	public Gas gasType_ = Gas.TypeA;
-	public Gas GasType { get{ return gasType_; } set { gasType_ = value; } }
+
+	public delegate void FnOnStartFart( NPC npc );
+	public delegate void FnOnFinishFart( NPC npc );
+	public FnOnStartFart onStartFart;
+	public FnOnFinishFart onFinishFart;
+	public Gas   gasType = Gas.TypeA;
 	public float fartTotalTime = 1.0f;
 	private float fartTime = 0.0f;
+
+	private bool isFarting_ = false;
 	// Use this for initialization
 	void Start () 
 	{
-
-
-	
 	}
 	
 	// Update is called once per frame
@@ -28,7 +29,8 @@ public class NPC : Actor {
 			fartTime += Time.deltaTime;
 			if ( fartTime > fartTotalTime )
 			{
-				//finishFart();
+
+				finishFart();
 			}
 		}
 	}
@@ -38,23 +40,29 @@ public class NPC : Actor {
 		return isFarting_;
 	}
 	
-	
-
-	/* bool startFart( float totalTime )
+	public void startFart( float totalTime )
 	{
-		Debug.Log ("Start Part");
 		if (isFarting_) 
 		{
-
+			Debug.Log("Fart Have Started" );
+			return;
 		}
+		Debug.Log ("Start Fart");
+		fartTime = 0 ;
+		fartTotalTime  = totalTime ;
+		isFarting_ = true;
+		if ( onStartFart != null )
+			onStartFart (this);
 
-	}*/
+	}
 
-	/*public bool finishFart()
+	public void finishFart()
 	{
-		Debug.Log ("Start Part");
-		isFarting = false;
-	}*/
+		Debug.Log ("Finsh Fart");
+		isFarting_ = false;
+		if ( onFinishFart != null )
+			onFinishFart (this);
+	}
 
 
 

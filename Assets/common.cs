@@ -7,7 +7,7 @@ namespace GoingUp
 	{
 		TypeA ,
 		TypeB ,
-		TypeC,
+		TypeC
 	}
 
 	public class Actor : MonoBehaviour

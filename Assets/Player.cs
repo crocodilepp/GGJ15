@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using GoingUp;
 
@@ -11,9 +12,42 @@ public class Player : Actor {
 	FnOnDamage onDamage;
 
 	KeyCode keyType = KeyCode.Space;
+
+	public Slider hpSlider;
+
+	public void ShowHpSlider()
+	{
+		hpSlider.maxValue = hpOriginal;
+		hpSlider.value = Hp;
+	}
+
+	public Slider o2Slider;
+
+	public void ShowO2Slider()
+	{
+		o2Slider.maxValue = o2OriginalValue;
+		o2Slider.value = o2value;
+	}
+
 	
 	public NPC npc;
-	public float hp = 0;
+	private float hp = 0;
+	public float Hp
+	{
+		get
+		{
+//			Debug.Log("Hp = " + hp);
+			return hp;
+		}
+		set
+		{
+			hp = value;
+			if(hp > hpOriginal)
+			{
+				hp = hpOriginal;
+			}
+		}
+	}
 	public float hpOriginal = 100;
 	public  float hpLostSpeed = 10;
 	public float o2value = 0;
@@ -80,16 +114,19 @@ public class Player : Actor {
 				o2value =o2OriginalValue;
 			}
 		} 
-		Debug.Log ("Recovery O2! (value:"+value+") (player O2:"+o2value+")");
+//		Debug.Log ("Recovery O2! (value:"+value+") (player O2:"+o2value+")");
 	}
 
 	bool haveGas()
 	{
-		return false;
-		//return npc.isFarting;
+//		return false;
+		return npc.isFarting();
 	}
+
 	void Update () 
 	{
+		ShowHpSlider();
+		ShowO2Slider();
 		if (!isBreathing ()) 
 		{
 			LowerO2 (o2LostSpeed * Time.deltaTime);
@@ -102,7 +139,8 @@ public class Player : Actor {
 			}
 			else
 			{
-				takeDamage(hpLostSpeed * Time.deltaTime);
+				effect(npc);
+//				takeDamage(hpLostSpeed * Time.deltaTime);
 			}
 		}
 		
@@ -129,13 +167,17 @@ public class Player : Actor {
 
 	public void effect( NPC npc )
 	{
-		switch (npc.GasType) 
+		switch (npc.gasType) 
 		{
 			case Gas.TypeA:
+				takeDamage(hpLostSpeed * Time.deltaTime);
 				break;
 			case Gas.TypeB:
+				Hp += 10;
 				break;
 			case Gas.TypeC:
+				Hp += 0;
+				takeDamage(hpLostSpeed * 0.5f * Time.deltaTime);
 				break;
 		}
 	}
