@@ -6,7 +6,7 @@ using GoingUp;
 namespace GoingUp
 {
 public class NPC : Actor {
-
+		public float damage;
 	public delegate void FnOnStartFart( NPC npc );
 	public delegate void FnOnFinishFart( NPC npc );
 	public FnOnStartFart onStartFart;

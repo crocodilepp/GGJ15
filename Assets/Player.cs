@@ -100,20 +100,32 @@ public class Player : Actor {
 
 	public void RecoveryO2(float value)
 	{
-		bool playerDeath = hp <= 0;
+			bool playerDeath = hp <= 0;
 
+			if (!playerDeath) {
+				bool maxO2 = o2value <= o2OriginalValue;
+				if (maxO2) {	
+					o2value += value;
+				} else {
+					o2value = o2OriginalValue;
+				}
+			}
+	}
+
+	public void RecoveryHP(float value)
+	{
+		bool playerDeath = hp <= 0;
+		
 		if (!playerDeath) 
 		{
-			bool maxO2 = o2value <= o2OriginalValue;
-			if (maxO2) 
-			{	
-				o2value += value;
-			} 
-			else 
-			{
-				o2value =o2OriginalValue;
-			}
+			hp = 0;
 		} 
+
+		hp += value
+		if(hp > hpOriginal)
+		{
+			hp = hpOriginal;
+		}
 //		Debug.Log ("Recovery O2! (value:"+value+") (player O2:"+o2value+")");
 	}
 
@@ -139,8 +151,8 @@ public class Player : Actor {
 			}
 			else
 			{
-				effect(npc);
-//				takeDamage(hpLostSpeed * Time.deltaTime);
+				npc.effect( this );
+//			takeDamage(hpLostSpeed * Time.deltaTime);
 			}
 		}
 		
@@ -165,22 +177,7 @@ public class Player : Actor {
 
 	
 
-	public void effect( NPC npc )
-	{
-		switch (npc.gasType) 
-		{
-			case Gas.TypeA:
-				takeDamage(hpLostSpeed * Time.deltaTime);
-				break;
-			case Gas.TypeB:
-				Hp += 10;
-				break;
-			case Gas.TypeC:
-				Hp += 0;
-				takeDamage(hpLostSpeed * 0.5f * Time.deltaTime);
-				break;
-		}
-	}
+
 
 
 }
