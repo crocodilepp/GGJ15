@@ -40,14 +40,16 @@ namespace GoingUp
 			StartCoroutine(OpenDoor());
 			
 			RandomPickNpc();
-			npcAnimator = npc.npcAnimator;
-			npcAvatar = npc.npcAvatar;
-			npcTempAvatar = npc.npcTempAvatar;
 		}
 
 		void RandomPickNpc()
 		{
-			npc = npcList[Random.Range(0,(npcList.Count() - 1) )];
+			int randomIndex = Random.Range(0,(npcList.Count()) );
+			npc = npcList[randomIndex];
+			
+			npcAnimator = npc.npcAnimator;
+			npcAvatar = npc.npcAvatar;
+			npcTempAvatar = npc.npcTempAvatar;
 		}
 
 		public void HandleOnDeath()
@@ -150,6 +152,7 @@ namespace GoingUp
 //			audio.PlayOneShot(npc.footstepSound);
 			npcAnimator.SetTrigger("OutBox");
 			yield return new WaitForSeconds(goOutTime);
+			npc = null;
 			AtFloor();
 		}
 
