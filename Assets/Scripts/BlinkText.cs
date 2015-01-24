@@ -4,6 +4,7 @@ using System.Collections;
 
 public class BlinkText : MonoBehaviour 
 {
+	public float blinkSpeed = 0.5f;
 	Text _text;
 	string tempText;
 
@@ -22,10 +23,10 @@ public class BlinkText : MonoBehaviour
 	{
 		while (true)
 		{
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(blinkSpeed);
 			_text.text = "";
 
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(blinkSpeed);
 			_text.text = tempText;
 		}
 	}
