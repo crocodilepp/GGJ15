@@ -35,3 +35,8 @@ web/jquery.min.js
 web/UnityObject2.js
 web/web.html
 web/web.unity3d
+/Assets/common.cs.meta
+/Assets/NPC.cs.meta
+/Assets/Player.cs.meta
+/Assets/Scripts.meta
+/Assets/UIFace.shader.meta
