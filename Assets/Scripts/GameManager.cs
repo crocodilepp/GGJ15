@@ -18,7 +18,7 @@ namespace GoingUp
 		public float doorClosingTime = 4.0f;
 		public float atFloorDingTime = 2.5f;
 		public Text floorIndexUI;
-		public List<NPC> npsList;
+		public List<NPC> npcList;
 		public NPC npc;
 		public Player player;
 		public Animator backGroundAnimator;
@@ -38,9 +38,16 @@ namespace GoingUp
 		{
 			player.onDeath += HandleOnDeath;
 			StartCoroutine(OpenDoor());
+			
+			RandomPickNpc();
 			npcAnimator = npc.npcAnimator;
 			npcAvatar = npc.npcAvatar;
 			npcTempAvatar = npc.npcTempAvatar;
+		}
+
+		void RandomPickNpc()
+		{
+			npc = npcList[Random.Range(0,(npcList.Count() - 1) )];
 		}
 
 		public void HandleOnDeath()
@@ -116,6 +123,8 @@ namespace GoingUp
 
 		public void MakeNpc()
 		{
+			
+			RandomPickNpc();
 			npc.gasType = (Gas) Random.Range(0,3);
 			Debug.LogWarning("Create A Npc !!" + npc.gasType );
 //			npcTempAvatar.GetComponent<Image>().color = theColor;
