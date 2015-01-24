@@ -30,4 +30,11 @@ public class BlinkText : MonoBehaviour
 			_text.text = tempText;
 		}
 	}
+
+	public void ChangeSpeed(float speed)
+	{
+		StopCoroutine(Blink());
+		blinkSpeed = speed;
+		StartCoroutine(Blink());
+	}
 }
