@@ -18,7 +18,7 @@ namespace GoingUp
 		public float doorClosingTime = 4.0f;
 		public float atFloorDingTime = 2.5f;
 		public Text floorIndexUI;
-		public List<NPC> npsList;
+		public List<NPC> npcList;
 		public NPC npc;
 		public Player player;
 		public Animator backGroundAnimator;
@@ -39,10 +39,16 @@ namespace GoingUp
 		{
 			player.onDeath += HandleOnDeath;
 			StartCoroutine(OpenDoor());
+			RandomPickNpc();
+			GameObject.Instantiate(Resources.Load("Prefabs/Fart"));
+		}
+
+		void RandomPickNpc()
+		{
+			npc = npcList[Random.Range(0,(npcList.Count() - 1) )];
 			npcAnimator = npc.npcAnimator;
 			npcAvatar = npc.npcAvatar;
 			npcTempAvatar = npc.npcTempAvatar;
-			GameObject.Instantiate(Resources.Load("Prefabs/Fart"));
 		}
 
 		void Update()
@@ -125,10 +131,9 @@ namespace GoingUp
 
 		public void MakeNpc()
 		{
+			RandomPickNpc();
 			npc.gasType = (Gas) Random.Range(0,3);
 			Debug.LogWarning("Create A Npc !!" + npc.gasType );
-//			npcTempAvatar.GetComponent<Image>().color = theColor;
-//			npcAvatar.GetComponent<Image>().color = theColor;
 		}
 
 		IEnumerator GoingInto()
@@ -150,6 +155,7 @@ namespace GoingUp
 //			audio.PlayOneShot(npc.footstepSound);
 			npcAnimator.SetTrigger("OutBox");
 			yield return new WaitForSeconds(goOutTime);
+			npc = null;
 			AtFloor();
 		}
 
