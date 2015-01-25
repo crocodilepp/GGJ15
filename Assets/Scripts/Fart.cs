@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class Fart : MonoBehaviour {
 
 	public List<AudioClip> Clips;
-	public AudioSource Audio;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +20,6 @@ public class Fart : MonoBehaviour {
 	{
 		int dice = Random.Range(0, Clips.Count);
 		AudioClip clip = Clips[dice];
-		Audio.PlayOneShot(clip);
+		audio.PlayOneShot(clip);
 	}
 }

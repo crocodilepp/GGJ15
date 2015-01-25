@@ -33,7 +33,6 @@ namespace GoingUp
 		public AudioClip elevatorMovingSound;
 		public AudioClip atFloorDingSound;
 		public AudioClip footstepSound;
-		public AudioClip fallSound;
 		public GameObject screenMask;
 		
 		void Start () 
@@ -63,7 +62,6 @@ namespace GoingUp
 		public void HandleOnDeath()
 		{
 			gameOverText.SetActive(true);
-			audio.PlayOneShot(fallSound);
 		}
 
 		public void UpFloor()
@@ -135,7 +133,8 @@ namespace GoingUp
 		public void MakeNpc()
 		{
 			RandomPickNpc();
-			npc.gasType = (Gas) Random.Range(0,3);
+//			npc.gasType = (Gas) Random.Range(0,3);
+			npc.gasType = Gas.TypeA;
 			Debug.Log("Create A Npc !!" + npc.gasType );
 //			npcTempAvatar.GetComponent<Image>().color = theColor;
 //			npcAvatar.GetComponent<Image>().color = theColor;
