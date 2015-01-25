@@ -193,7 +193,7 @@ namespace GoingUp
 
 		IEnumerator OpenDoor()
 		{
-			doorRAnimator.SetTrigger ("openDoor");
+//			doorRAnimator.SetTrigger ("openDoor");
 			doorLAnimator.SetTrigger ("openDoor");
 //			floorIndexUI.text = "Open";
 			audio.PlayOneShot(doorOpenSound);
@@ -263,7 +263,7 @@ namespace GoingUp
 
 		IEnumerator CloseDoor()
 		{
-			doorRAnimator.SetTrigger ("closeDoor");
+//			doorRAnimator.SetTrigger ("closeDoor");
 			doorLAnimator.SetTrigger ("closeDoor");
 //			floorIndexUI.text = "Close";
 			audio.PlayOneShot(doorCloseSound);
