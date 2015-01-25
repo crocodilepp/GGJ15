@@ -34,6 +34,8 @@ namespace GoingUp
 		public AudioClip atFloorDingSound;
 		public AudioClip footstepSound;
 		public GameObject screenMask;
+		public Animator doorRAnimator;
+		public Animator doorLAnimator;
 		
 		void Start () 
 		{
@@ -97,6 +99,8 @@ namespace GoingUp
 
 		IEnumerator OpenDoor()
 		{
+			doorRAnimator.SetTrigger ("openDoor");
+			doorLAnimator.SetTrigger ("openDoor");
 			floorIndexUI.text = "Open";
 			audio.PlayOneShot(doorOpenSound);
 			yield return new WaitForSeconds(doorOpeningTime);
@@ -141,7 +145,7 @@ namespace GoingUp
 
 		IEnumerator GoingInto()
 		{
-//			audio.PlayOneShot(npc.footstepSound);
+//		audio.PlayOneShot(npc.footstepSound);
 			npcAnimator.SetTrigger("InBox");
 			yield return new WaitForSeconds(intoTime);
 			StartCoroutine(CloseDoor());
@@ -156,7 +160,7 @@ namespace GoingUp
 		
 		IEnumerator GoingOutSide()
 		{
-//			audio.PlayOneShot(npc.footstepSound);
+//		audio.PlayOneShot(npc.footstepSound);
 			npcAnimator.SetTrigger("OutBox");
 			yield return new WaitForSeconds(goOutTime);
 			npc = null;
@@ -165,6 +169,8 @@ namespace GoingUp
 
 		IEnumerator CloseDoor()
 		{
+			doorRAnimator.SetTrigger ("closeDoor");
+			doorLAnimator.SetTrigger ("closeDoor");
 			floorIndexUI.text = "Close";
 			audio.PlayOneShot(doorCloseSound);
 			yield return new WaitForSeconds(doorClosingTime);
