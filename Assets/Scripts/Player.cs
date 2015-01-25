@@ -54,7 +54,24 @@ public class Player : Actor {
 	}
 
 	
-	public NPC npc;
+	private NPC npc;
+		public NPC Npc
+		{
+			get
+			{
+				return npc;
+			}
+			set
+			{
+				npc = value;
+				npc.onStartFart = delegate {
+					if(npc.gasType == Gas.Yam)
+					{
+						takeDamage(30f);
+					}
+				};
+			}
+		}
 	private float hp = 0;
 	public float Hp
 	{
@@ -197,13 +214,16 @@ public class Player : Actor {
 	{
 		switch (npc.gasType) 
 		{
-			case Gas.Yam:
-				takeDamage(hpLostSpeed * Time.deltaTime * 3);
-				break;
 			case Gas.Perfume:
 				takeDamage(hpLostSpeed * Time.deltaTime * -1.0f);
 				break;
 			case Gas.Smoke:
+				takeDamage(hpLostSpeed * 0.5f * Time.deltaTime * 2);
+				break;
+			case Gas.DirtyBody:
+				takeDamage(hpLostSpeed * 0.5f * Time.deltaTime * 1.5f);
+				break;
+			case Gas.StinkingFeet:
 				takeDamage(hpLostSpeed * 0.5f * Time.deltaTime);
 				break;
 		}

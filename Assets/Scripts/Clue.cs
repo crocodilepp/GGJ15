@@ -59,6 +59,13 @@ public class Clue : MonoBehaviour {
 	{
 		Reset();
 		mFart.SetActive(true);
+		StartCoroutine(HideFart());
+	}
+
+	private IEnumerator HideFart()
+	{
+		yield return new WaitForSeconds(0.5f);
+		Reset();
 	}
 
 	public void ShowStinkingFeet()

@@ -51,7 +51,7 @@ namespace GoingUp
 			npcAnimator = npc.npcAnimator;
 			npcAvatar = npc.npcAvatar;
 			npcTempAvatar = npc.npcTempAvatar;
-			player.npc = npc;
+			player.Npc = npc;
 		}
 
 		void Update()
