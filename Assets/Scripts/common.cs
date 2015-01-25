@@ -5,9 +5,11 @@ namespace GoingUp
 {
 	public enum Gas
 	{
-		TypeA ,
-		TypeB ,
-		TypeC
+		Smoke,
+		Yam,
+		Perfume,
+		StinkingFeet,
+		DirtyBody,
 	}
 
 	public class Actor : MonoBehaviour

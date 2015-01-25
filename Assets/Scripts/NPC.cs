@@ -17,15 +17,16 @@ public class NPC : Actor {
 	public GameObject npcAvatar;
 	public GameObject npcTempAvatar;
 
-	public Gas   gasType = Gas.TypeA;
+	public Gas   gasType = Gas.Yam;
 	public float fartTotalTime = 1.0f;
 	private float fartTime = 0.0f;
-
+	public Clue clue;
 
 	private bool isFarting_ = false;
 	// Use this for initialization
 	void Start () 
 	{
+		clue = transform.FindChild("Clue").GetComponent<Clue>();
 	}
 	
 	// Update is called once per frame
@@ -62,8 +63,11 @@ public class NPC : Actor {
 		if ( onStartFart != null )
 			onStartFart (this);
 
-		if (gasType == Gas.TypeA)
+		if (gasType == Gas.Yam)
+		{
 			GameObject.FindGameObjectWithTag("Fart").SendMessage("RandomPlay");
+			clue.ShowFart();
+		}
 	}
 
 	public void finishFart()
@@ -72,9 +76,34 @@ public class NPC : Actor {
 		isFarting_ = false;
 		if ( onFinishFart != null )
 			onFinishFart (this);
+		clue.Reset();
 	}
 
+	public void ShowClue()
+	{
+			switch(gasType)
+			{
+			case Gas.DirtyBody:
+				clue.ShowDirtyBody();
+				break;
+			case Gas.Perfume:
+				clue.ShowPerfume();
+				break;
+			case Gas.Smoke:
+				clue.ShowSmoke();
+				break;
+			case Gas.Yam:
+				clue.ShowYam();
+				break;
+			case Gas.StinkingFeet:
+				clue.ShowStinkingFeet();
+				break;
+			}
+	}
 
-
+	public void HideClue()
+	{
+		clue.Reset();
+	}
 }
 }
