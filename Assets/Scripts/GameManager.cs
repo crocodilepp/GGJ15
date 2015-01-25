@@ -140,7 +140,7 @@ namespace GoingUp
 			audio.clip = elevatorMovingSound;
 			audio.loop = true;
 			audio.Play();
-			floorIndexUI.text = "Up";
+//			floorIndexUI.text = "Up";
 			backGroundAnimator.SetTrigger("UpFloor");
 			npc.startFart(5.0f);
 
@@ -185,7 +185,7 @@ namespace GoingUp
 
 		IEnumerator PlayDingDong()
 		{
-			floorIndexUI.text = "Ding Dong";
+//			floorIndexUI.text = "Ding Dong";
 			audio.PlayOneShot(atFloorDingSound);
 			yield return new WaitForSeconds(atFloorDingTime);
 			StartCoroutine(OpenDoor());
@@ -195,7 +195,7 @@ namespace GoingUp
 		{
 			doorRAnimator.SetTrigger ("openDoor");
 			doorLAnimator.SetTrigger ("openDoor");
-			floorIndexUI.text = "Open";
+//			floorIndexUI.text = "Open";
 			audio.PlayOneShot(doorOpenSound);
 			yield return new WaitForSeconds(doorOpeningTime);
 			AtFloor();
@@ -203,7 +203,7 @@ namespace GoingUp
 		
 		public void AtFloor()
 		{
-			floorIndexUI.text = currentFloor.ToString();
+			floorIndexUI.text = (currentFloor + 1).ToString();
 			if (currentFloor == winFloor)
 			{
 				gameWinText.SetActive(true);
@@ -265,7 +265,7 @@ namespace GoingUp
 		{
 			doorRAnimator.SetTrigger ("closeDoor");
 			doorLAnimator.SetTrigger ("closeDoor");
-			floorIndexUI.text = "Close";
+//			floorIndexUI.text = "Close";
 			audio.PlayOneShot(doorCloseSound);
 			yield return new WaitForSeconds(doorClosingTime);
 			npc.HideClue();
