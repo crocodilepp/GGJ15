@@ -94,7 +94,7 @@ public class Player : Actor {
 	{		
 		if(hp <= 0) return 0;
 
-		hp -= damage;
+		Hp -= damage;
 		if ( onDamage != null )
 		{
 			onDamage (damage);
@@ -197,13 +197,13 @@ public class Player : Actor {
 	{
 		switch (npc.gasType) 
 		{
-			case Gas.TypeA:
+			case Gas.Yam:
 				takeDamage(hpLostSpeed * Time.deltaTime * 3);
 				break;
-			case Gas.TypeB:
+			case Gas.Perfume:
 				takeDamage(hpLostSpeed * Time.deltaTime * -1.0f);
 				break;
-			case Gas.TypeC:
+			case Gas.Smoke:
 				takeDamage(hpLostSpeed * 0.5f * Time.deltaTime);
 				break;
 		}

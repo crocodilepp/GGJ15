@@ -145,6 +145,7 @@ namespace GoingUp
 			npcAnimator.SetTrigger("InBox");
 			yield return new WaitForSeconds(intoTime);
 			StartCoroutine(CloseDoor());
+			npc.ShowClue();
 		}
 
 		public void NpcOutBox()
@@ -167,6 +168,7 @@ namespace GoingUp
 			floorIndexUI.text = "Close";
 			audio.PlayOneShot(doorCloseSound);
 			yield return new WaitForSeconds(doorClosingTime);
+			npc.HideClue();
 			UpFloor();
 		}
 	}
