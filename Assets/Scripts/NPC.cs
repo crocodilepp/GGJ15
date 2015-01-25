@@ -26,7 +26,7 @@ public class NPC : Actor {
 	// Use this for initialization
 	void Start () 
 	{
-		clue = transform.FindChild("Clue").GetComponent<Clue>();
+		clue = GetComponentInChildren<Clue>();
 	}
 	
 	// Update is called once per frame
@@ -66,7 +66,8 @@ public class NPC : Actor {
 		if (gasType == Gas.Yam)
 		{
 			GameObject.FindGameObjectWithTag("Fart").SendMessage("RandomPlay");
-			clue.ShowFart();
+			if(clue != null)
+				clue.ShowFart();
 		}
 	}
 
@@ -76,7 +77,8 @@ public class NPC : Actor {
 		isFarting_ = false;
 		if ( onFinishFart != null )
 			onFinishFart (this);
-		clue.Reset();
+		if(clue != null)
+			clue.Reset();
 	}
 
 	public void ShowClue()
@@ -84,26 +86,32 @@ public class NPC : Actor {
 			switch(gasType)
 			{
 			case Gas.DirtyBody:
-				clue.ShowDirtyBody();
+				if(clue != null)
+					clue.ShowDirtyBody();
 				break;
 			case Gas.Perfume:
-				clue.ShowPerfume();
+				if(clue != null)
+					clue.ShowPerfume();
 				break;
 			case Gas.Smoke:
-				clue.ShowSmoke();
+				if(clue != null)
+					clue.ShowSmoke();
 				break;
 			case Gas.Yam:
-				clue.ShowYam();
+				if(clue != null)
+					clue.ShowYam();
 				break;
 			case Gas.StinkingFeet:
-				clue.ShowStinkingFeet();
+				if(clue != null)
+					clue.ShowStinkingFeet();
 				break;
 			}
 	}
 
 	public void HideClue()
 	{
-		clue.Reset();
+		if(clue != null)
+			clue.Reset();
 	}
 }
 }

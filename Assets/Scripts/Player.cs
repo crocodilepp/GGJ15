@@ -65,7 +65,13 @@ public class Player : Actor {
 //		else
 		{
 			
-			faceList.ForEach(x => x.SetActive(false));
+				foreach(GameObject face in faceList)
+				{
+					if(!face.name.Equals("HotGirl"))
+					{
+						face.SetActive(false);
+					}
+				}
 				if(o2perCent > 0.8f) 
 				{
 					faceList[1].SetActive(true);
@@ -109,6 +115,7 @@ public class Player : Actor {
 				if(npc.name.Equals("Npc2") || npc.name.Equals("Npc4"))
 				{
 					faceList[0].SetActive(true);
+					StartCoroutine(HideHotGirlFace());
 				}
 			}
 		}
@@ -143,7 +150,7 @@ public class Player : Actor {
 
 		private IEnumerator HideHotGirlFace()
 		{
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(1f);
 			faceList[0].SetActive(false);
 		}
 
