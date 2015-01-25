@@ -63,6 +63,7 @@ namespace GoingUp
 
 		public void HandleOnDeath()
 		{
+			StopAllCoroutines();
 			gameOverText.GetComponent<GameOverBoard>().SetLevel(currentFloor);
 			gameOverText.SetActive(true);
 		}
