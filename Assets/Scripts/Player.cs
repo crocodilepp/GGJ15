@@ -193,8 +193,6 @@ public class Player : Actor {
 		return onBreating;
 	}
 
-	
-
 	public void effect( NPC npc )
 	{
 		switch (npc.gasType) 
