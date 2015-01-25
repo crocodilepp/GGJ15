@@ -39,10 +39,17 @@ namespace GoingUp
 		
 		void Start () 
 		{
+			var obj = GameObject.Instantiate(Resources.Load("Prefabs/Npcs")) as GameObject;
+			obj.transform.parent = transform;
+			foreach(NPC npc in obj.GetComponentsInChildren<NPC>())
+			{
+				npcList.Add(npc);
+			}
+			RandomPickNpc();
 			player.onDeath += HandleOnDeath;
 			StartCoroutine(OpenDoor());
-			RandomPickNpc();
 			GameObject.Instantiate(Resources.Load("Prefabs/Fart"));
+			screenMask = GameObject.Find("ScreenMask");
 		}
 
 		void RandomPickNpc()
