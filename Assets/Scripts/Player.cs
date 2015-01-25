@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 using GoingUp;
 
 namespace GoingUp
@@ -10,6 +12,8 @@ public class Player : Actor {
 	public delegate void FnOnDamage( float value );
 	public FnOnDeath onDeath;
 	public FnOnDamage onDamage;
+
+	public List<GameObject> faceList;
 
 	public AudioClip Suffocate;
 	public AudioClip Relief;
@@ -51,6 +55,35 @@ public class Player : Actor {
 	{
 		o2Slider.maxValue = o2OriginalValue;
 		o2Slider.value = o2value;
+		float o2perCent = (o2value / o2OriginalValue) ;
+
+		if(isBreathing())
+		{
+			faceList.ForEach(x => x.SetActive(false));
+			faceList[1].SetActive(true);
+		}
+		else
+		{
+			
+			faceList.ForEach(x => x.SetActive(false));
+				if(o2perCent > 0.75f) 
+				{
+					faceList[2].SetActive(true);
+				}
+				else if(o2perCent > 0.5f) 
+				{
+					faceList[3].SetActive(true);
+				}
+				else if(o2perCent > 0.25f) 
+				{
+					faceList[4].SetActive(true);
+				}
+				else if(o2perCent > -1.0f) 
+				{
+					faceList[5].SetActive(true);
+				}
+
+		}
 	}
 
 	

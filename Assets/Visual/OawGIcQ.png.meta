@@ -1,7 +1,15 @@
 fileFormatVersion: 2
 guid: 8234faf554d7444648e8b86b53f1111b
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: OawGIcQ_0
+    21300002: OawGIcQ_1
+    21300004: OawGIcQ_2
+    21300006: OawGIcQ_3
+    21300008: OawGIcQ_4
+    21300010: OawGIcQ_5
+    21300012: OawGIcQ_6
+    21300014: OawGIcQ_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -31,7 +39,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -42,6 +50,86 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: OawGIcQ_0
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 2546
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: OawGIcQ_1
+      rect:
+        serializedVersion: 2
+        x: 1653
+        y: 2534
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: OawGIcQ_2
+      rect:
+        serializedVersion: 2
+        x: 2556
+        y: 2577
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: OawGIcQ_3
+      rect:
+        serializedVersion: 2
+        x: 2625
+        y: 1615
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: OawGIcQ_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 118
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: OawGIcQ_5
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 0
+        width: 1906
+        height: 2248
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: OawGIcQ_6
+      rect:
+        serializedVersion: 2
+        x: 2690
+        y: 7
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: OawGIcQ_7
+      rect:
+        serializedVersion: 2
+        x: 2674
+        y: 799
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

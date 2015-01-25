@@ -1,38 +1,41 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using GoingUp;
 
 public class GameOverBoard : MonoBehaviour 
 {
-//	public float upSpeed = 10.0f;
+	public Animator animator;
 	public Image panel;
-	public Text scoreText;
+	public Text levelText;
 	public Text bestText;
+
+	int bestLevel = 0;
+
+//	GameManager gm;
 //
-//	public void Start()
+//	public void Awake()
 //	{
-////		SlideUp();
+//		Debug.Log("GameOverBoard awake");
+//		gm = GameObject.FindObjectOfType<GameManager>();
+//		gm.player.onDeath += HanledPlayerOnDeath;
 //	}
 //
-//	public void Update()
+//	void HanledPlayerOnDeath()
 //	{
-//		if (panel.rectTransform.position.y > 0)
-//		{
-//			panel.rectTransform.Translate(Vector3.up * Time.deltaTime * upSpeed);
-//		}
+//		Debug.Log("HanledPlayerOnDeath");
+//		SetLevel(gm.currentFloor);
+//		gameObject.SetActive(true);
 //	}
-//
-//	public void SlideUp()
-//	{
-//		StartCoroutine(PanelMoveUp());
-//	}
-//
-//	IEnumerator PanelMoveUp()
-//	{
-//		while (panel.transform.position.y > 0)
-//		{
-//			yield return null;
-//			panel.transform.Translate(Vector3.up * Time.deltaTime * upSpeed);
-//		}
-//	}
+
+	public void SetLevel(int level)
+	{
+		if (level > bestLevel)
+		{
+			bestLevel = level;
+			bestText.text = level.ToString();
+		}
+
+		levelText.text = level.ToString();
+	}
 }
