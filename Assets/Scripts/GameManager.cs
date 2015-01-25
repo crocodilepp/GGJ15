@@ -76,14 +76,9 @@ namespace GoingUp
 			player.onDeath += HandleOnDeath;
 			StartCoroutine(OpenDoor());
 			GameObject.Instantiate(Resources.Load("Prefabs/Fart"));
-<<<<<<< HEAD
-
-			
 			setBGTexture( bgFront.renderer.material , bgFrontTextures[0] , bgFrontTextures[1] );
 			setBGTexture( bgLeft.renderer.material , bgLeftTextures[0] , bgLeftTextures[1] );
-=======
 			screenMask = GameObject.Find("ScreenMask");
->>>>>>> 818f23b1e428c27fa7f48c9808c6c1a891389393
 		}
 
 		void RandomPickNpc()
