@@ -45,6 +45,7 @@ namespace GoingUp
 			{
 				npcList.Add(npc);
 			}
+
 			RandomPickNpc();
 			player.onDeath += HandleOnDeath;
 			StartCoroutine(OpenDoor());
