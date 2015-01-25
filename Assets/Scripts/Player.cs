@@ -57,32 +57,35 @@ public class Player : Actor {
 		o2Slider.value = o2value;
 		float o2perCent = (o2value / o2OriginalValue) ;
 
-		if(isBreathing())
-		{
-			faceList.ForEach(x => x.SetActive(false));
-			faceList[1].SetActive(true);
-		}
-		else
+//		if(isBreathing())
+//		{
+//			faceList.ForEach(x => x.SetActive(false));
+//			faceList[1].SetActive(true);
+//		}
+//		else
 		{
 			
 			faceList.ForEach(x => x.SetActive(false));
-				if(o2perCent > 0.75f) 
+				if(o2perCent > 0.8f) 
+				{
+					faceList[1].SetActive(true);
+				}
+				else if(o2perCent > 0.6f) 
 				{
 					faceList[2].SetActive(true);
 				}
-				else if(o2perCent > 0.5f) 
+				else if(o2perCent > 0.4f) 
 				{
 					faceList[3].SetActive(true);
 				}
-				else if(o2perCent > 0.25f) 
+				else if(o2perCent > 0.2f) 
 				{
 					faceList[4].SetActive(true);
 				}
-				else if(o2perCent > -1.0f) 
+				else if(o2perCent > -1.0f)
 				{
 					faceList[5].SetActive(true);
 				}
-
 		}
 	}
 
@@ -98,11 +101,15 @@ public class Player : Actor {
 			{
 				npc = value;
 				npc.onStartFart = delegate {
-					if(npc.gasType == Gas.Yam)
+					if(npc.gasType == Gas.Yam && mIsBreathing)
 					{
 						takeDamage(30f);
 					}
 				};
+				if(npc.name.Equals("Npc2") || npc.name.Equals("Npc4"))
+				{
+					faceList[0].SetActive(true);
+				}
 			}
 		}
 	private float hp = 0;
@@ -133,6 +140,12 @@ public class Player : Actor {
 	{
 		initPlayerValue ();
 	}
+
+		private IEnumerator HideHotGirlFace()
+		{
+			yield return new WaitForSeconds(0.5f);
+			faceList[0].SetActive(false);
+		}
 
 	public void initPlayerValue()
 	{

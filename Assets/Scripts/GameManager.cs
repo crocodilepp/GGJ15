@@ -32,7 +32,6 @@ namespace GoingUp
 		public AudioClip doorCloseSound;
 		public AudioClip elevatorMovingSound;
 		public AudioClip atFloorDingSound;
-		public AudioClip footstepSound;
 		public GameObject screenMask;
 		public Animator doorRAnimator;
 		public Animator doorLAnimator;
