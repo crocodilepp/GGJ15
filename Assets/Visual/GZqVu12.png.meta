@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: 4a9b1267b717a4a9392e21b863b118b4
+guid: 52f46f0e1fb344240a1a232dafd22a90
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Ey7oiD4_0
-    21300002: Ey7oiD4_1
-    21300004: Ey7oiD4_2
+    21300000: GZqVu12_0
+    21300002: GZqVu12_1
+    21300004: GZqVu12_2
+    21300006: GZqVu12_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -46,35 +47,45 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Ey7oiD4_0
+    - name: GZqVu12_0
       rect:
         serializedVersion: 2
-        x: 23
-        y: 720
-        width: 600
-        height: 400
-      alignment: 9
-      pivot: {x: .319999993, y: .400000006}
+        x: 180
+        y: 566
+        width: 640
+        height: 525
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Ey7oiD4_1
+    - name: GZqVu12_1
       rect:
         serializedVersion: 2
-        x: 100
-        y: 513
-        width: 600
-        height: 200
-      alignment: 9
-      pivot: {x: .319999993, y: .300000012}
+        x: 918
+        y: 500
+        width: 640
+        height: 671
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Ey7oiD4_2
+    - name: GZqVu12_2
       rect:
         serializedVersion: 2
-        x: 147
-        y: 257
-        width: 600
-        height: 200
-      alignment: 9
-      pivot: {x: .319999993, y: .5}
+        x: 56
+        y: 0
+        width: 640
+        height: 500
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GZqVu12_3
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 0
+        width: 640
+        height: 500
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

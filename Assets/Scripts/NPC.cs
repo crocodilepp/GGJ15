@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using GoingUp;
 
 
@@ -61,7 +62,7 @@ public class NPC : Actor {
 		if ( onStartFart != null )
 			onStartFart (this);
 
-		if (gasType != Gas.TypeB)
+		if (gasType == Gas.TypeA)
 			GameObject.FindGameObjectWithTag("Fart").SendMessage("RandomPlay");
 	}
 
