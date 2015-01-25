@@ -57,37 +57,61 @@ public class Player : Actor {
 		o2Slider.value = o2value;
 		float o2perCent = (o2value / o2OriginalValue) ;
 
-		if(isBreathing())
-		{
-			faceList.ForEach(x => x.SetActive(false));
-			faceList[1].SetActive(true);
-		}
-		else
+//		if(isBreathing())
+//		{
+//			faceList.ForEach(x => x.SetActive(false));
+//			faceList[1].SetActive(true);
+//		}
+//		else
 		{
 			
 			faceList.ForEach(x => x.SetActive(false));
-				if(o2perCent > 0.75f) 
+				if(o2perCent > 0.8f) 
+				{
+					faceList[1].SetActive(true);
+				}
+				else if(o2perCent > 0.6f) 
 				{
 					faceList[2].SetActive(true);
 				}
-				else if(o2perCent > 0.5f) 
+				else if(o2perCent > 0.4f) 
 				{
 					faceList[3].SetActive(true);
 				}
-				else if(o2perCent > 0.25f) 
+				else if(o2perCent > 0.2f) 
 				{
 					faceList[4].SetActive(true);
 				}
-				else if(o2perCent > -1.0f) 
+				else if(o2perCent > -1.0f)
 				{
 					faceList[5].SetActive(true);
 				}
-
 		}
 	}
 
 	
-	public NPC npc;
+	private NPC npc;
+		public NPC Npc
+		{
+			get
+			{
+				return npc;
+			}
+			set
+			{
+				npc = value;
+				npc.onStartFart = delegate {
+					if(npc.gasType == Gas.Yam && mIsBreathing)
+					{
+						takeDamage(30f);
+					}
+				};
+				if(npc.name.Equals("Npc2") || npc.name.Equals("Npc4"))
+				{
+					faceList[0].SetActive(true);
+				}
+			}
+		}
 	private float hp = 0;
 	public float Hp
 	{
@@ -116,6 +140,12 @@ public class Player : Actor {
 	{
 		initPlayerValue ();
 	}
+
+		private IEnumerator HideHotGirlFace()
+		{
+			yield return new WaitForSeconds(0.5f);
+			faceList[0].SetActive(false);
+		}
 
 	public void initPlayerValue()
 	{
@@ -230,13 +260,16 @@ public class Player : Actor {
 	{
 		switch (npc.gasType) 
 		{
-			case Gas.Yam:
-				takeDamage(hpLostSpeed * Time.deltaTime * 3);
-				break;
 			case Gas.Perfume:
 				takeDamage(hpLostSpeed * Time.deltaTime * -1.0f);
 				break;
 			case Gas.Smoke:
+				takeDamage(hpLostSpeed * 0.5f * Time.deltaTime * 2);
+				break;
+			case Gas.DirtyBody:
+				takeDamage(hpLostSpeed * 0.5f * Time.deltaTime * 1.5f);
+				break;
+			case Gas.StinkingFeet:
 				takeDamage(hpLostSpeed * 0.5f * Time.deltaTime);
 				break;
 		}

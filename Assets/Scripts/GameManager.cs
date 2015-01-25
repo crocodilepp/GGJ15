@@ -35,7 +35,6 @@ namespace GoingUp
 		public AudioClip doorCloseSound;
 		public AudioClip elevatorMovingSound;
 		public AudioClip atFloorDingSound;
-		public AudioClip footstepSound;
 		public GameObject screenMask;
 		public Animator doorRAnimator;
 		public Animator doorLAnimator;
@@ -66,14 +65,25 @@ namespace GoingUp
 		
 		void Start () 
 		{
+			var obj = GameObject.Instantiate(Resources.Load("Prefabs/Npcs")) as GameObject;
+			obj.transform.parent = transform;
+			foreach(NPC npc in obj.GetComponentsInChildren<NPC>())
+			{
+				npcList.Add(npc);
+			}
+
+			RandomPickNpc();
 			player.onDeath += HandleOnDeath;
 			StartCoroutine(OpenDoor());
-			RandomPickNpc();
 			GameObject.Instantiate(Resources.Load("Prefabs/Fart"));
+<<<<<<< HEAD
 
 			
 			setBGTexture( bgFront.renderer.material , bgFrontTextures[0] , bgFrontTextures[1] );
 			setBGTexture( bgLeft.renderer.material , bgLeftTextures[0] , bgLeftTextures[1] );
+=======
+			screenMask = GameObject.Find("ScreenMask");
+>>>>>>> 818f23b1e428c27fa7f48c9808c6c1a891389393
 		}
 
 		void RandomPickNpc()
@@ -82,7 +92,7 @@ namespace GoingUp
 			npcAnimator = npc.npcAnimator;
 			npcAvatar = npc.npcAvatar;
 			npcTempAvatar = npc.npcTempAvatar;
-			player.npc = npc;
+			player.Npc = npc;
 		}
 
 		void Update()
@@ -118,6 +128,7 @@ namespace GoingUp
 
 		public void HandleOnDeath()
 		{
+			StopAllCoroutines();
 			gameOverText.GetComponent<GameOverBoard>().SetLevel(currentFloor);
 			gameOverText.SetActive(true);
 		}
