@@ -173,7 +173,7 @@ public class Player : Actor {
 				takeDamage(hpLostSpeed * Time.deltaTime);
 				break;
 			case Gas.TypeB:
-				Hp += 10;
+				takeDamage(hpLostSpeed * Time.deltaTime * -1.0f);
 				break;
 			case Gas.TypeC:
 				Hp += 0;

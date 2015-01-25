@@ -33,23 +33,30 @@ namespace GoingUp
 		public AudioClip elevatorMovingSound;
 		public AudioClip atFloorDingSound;
 		public AudioClip footstepSound;
+		public GameObject screenMask;
 		
 		void Start () 
 		{
 			player.onDeath += HandleOnDeath;
 			StartCoroutine(OpenDoor());
-			
 			RandomPickNpc();
+			GameObject.Instantiate(Resources.Load("Prefabs/Fart"));
 		}
 
 		void RandomPickNpc()
 		{
-			int randomIndex = Random.Range(0,(npcList.Count()) );
-			npc = npcList[randomIndex];
-			
+			npc = npcList[Random.Range(0,(npcList.Count() - 1) )];
 			npcAnimator = npc.npcAnimator;
 			npcAvatar = npc.npcAvatar;
 			npcTempAvatar = npc.npcTempAvatar;
+			player.npc = npc;
+		}
+
+		void Update()
+		{
+			Material mat = screenMask.renderer.material;
+			float scale = 2 * ( 1 - player.Hp / player.hpOriginal );
+			mat.SetFloat( "Scale" , scale );
 		}
 
 		public void HandleOnDeath()
@@ -125,8 +132,7 @@ namespace GoingUp
 
 		public void MakeNpc()
 		{
-			
-			RandomPickNpc(); 
+			RandomPickNpc();
 			npc.gasType = (Gas) Random.Range(0,3);
 			Debug.Log("Create A Npc !!" + npc.gasType );
 //			npcTempAvatar.GetComponent<Image>().color = theColor;

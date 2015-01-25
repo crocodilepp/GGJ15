@@ -57,9 +57,12 @@ public class NPC : Actor {
 		fartTime = 0 ;
 		fartTotalTime  = totalTime ;
 		isFarting_ = true;
+
 		if ( onStartFart != null )
 			onStartFart (this);
 
+		if (gasType != Gas.TypeB)
+			GameObject.FindGameObjectWithTag("Fart").SendMessage("RandomPlay");
 	}
 
 	public void finishFart()
