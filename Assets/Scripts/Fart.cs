@@ -6,7 +6,7 @@ public class Fart : MonoBehaviour {
 
 	public List<AudioClip> Clips;
 	public AudioSource Audio;
-
+ 
 	// Use this for initialization
 	void Start () {
 
