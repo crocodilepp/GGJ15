@@ -11,7 +11,10 @@ namespace GoingUp
 	{
 		public int currentFloor;
 		public int winFloor = 101;
-		public float upTime = 5.0f;
+//		public float upTime = 5.0f;		
+		public float upTimeStep1 = 1.0f;
+		public float upTimeStep2 = 3.0f;
+		public float upTimeStep3 = 1.0f;
 		public float intoTime = 1.0f;
 		public float goOutTime = 1.0f;
 		public float doorOpeningTime = 2.0f;
@@ -36,6 +39,30 @@ namespace GoingUp
 		public GameObject screenMask;
 		public Animator doorRAnimator;
 		public Animator doorLAnimator;
+
+		public GameObject bgFront;
+		public GameObject bgLeft;
+		public Texture[] bgFrontTextures;
+		public Texture[] bgLeftTextures;
+		
+		public float timeFactor = 0.0f;
+		private float curUpTime = 0.0f;
+		
+		private int   upStep = 0;
+		
+		void swapBGTexture( Material mat )
+		{
+			Texture texTop = mat.GetTexture( "TopTex" );
+			Texture texDown = mat.GetTexture( "DownTex" );
+			mat.SetTexture ("TopTex", texDown );
+			mat.SetTexture ("DownTex", texTop );
+		}
+		
+		void setBGTexture( Material mat , Texture texDown , Texture texTop )
+		{
+			mat.SetTexture ("TopTex", texTop );
+			mat.SetTexture ("DownTex", texDown );
+		}
 		
 		void Start () 
 		{
@@ -43,6 +70,10 @@ namespace GoingUp
 			StartCoroutine(OpenDoor());
 			RandomPickNpc();
 			GameObject.Instantiate(Resources.Load("Prefabs/Fart"));
+
+			
+			setBGTexture( bgFront.renderer.material , bgFrontTextures[0] , bgFrontTextures[1] );
+			setBGTexture( bgLeft.renderer.material , bgLeftTextures[0] , bgLeftTextures[1] );
 		}
 
 		void RandomPickNpc()
@@ -59,6 +90,30 @@ namespace GoingUp
 			Material mat = screenMask.renderer.material;
 			float scale = 2 * ( 1 - player.Hp / player.hpOriginal );
 			mat.SetFloat( "Scale" , scale );
+			
+			if (upStep > 0 ) 
+			{
+				curUpTime += Time.deltaTime;
+				
+				if ( upStep == 1 )
+				{
+					float f = curUpTime / upTimeStep1;
+					timeFactor = f * f;
+				}
+				else if ( upStep == 2 )
+				{
+					float loopTime = 6.0f;
+					timeFactor = ( loopTime * curUpTime / upTimeStep2 ) % 1.0f;
+				}
+				else if ( upStep == 3 )
+				{
+					float f = curUpTime / upTimeStep1;
+					timeFactor = (float)System.Math.Sqrt( f );
+				}
+				
+				bgLeft.renderer.material.SetFloat("TimeFactor" , timeFactor);
+				bgFront.renderer.material.SetFloat("TimeFactor" , timeFactor);
+			}
 		}
 
 		public void HandleOnDeath()
@@ -82,7 +137,39 @@ namespace GoingUp
 			floorIndexUI.text = "Up";
 			backGroundAnimator.SetTrigger("UpFloor");
 			npc.startFart(5.0f);
-			yield return new WaitForSeconds(upTime);
+
+			
+			upStep = 1;
+			curUpTime = 0.0f;
+			//Debug.LogError("Room up Step =" + upStep );
+			yield return new WaitForSeconds(upTimeStep1);
+			
+			setBGTexture( bgFront.renderer.material , bgFrontTextures[1] , bgFrontTextures[1] );
+			setBGTexture( bgLeft.renderer.material , bgLeftTextures[1] , bgLeftTextures[1] );
+			
+			upStep = 2;
+			curUpTime = 0.0f;
+			//Debug.LogError("Room up Step =" + upStep );
+			yield return new WaitForSeconds(upTimeStep2);
+			
+			setBGTexture( bgFront.renderer.material , bgFrontTextures[1] , bgFrontTextures[0] );
+			setBGTexture( bgLeft.renderer.material , bgLeftTextures[1] , bgLeftTextures[0] );
+			upStep = 3;
+			curUpTime = 0.0f;
+			
+			bgLeft.renderer.material.SetFloat("TimeFactor" , 0);
+			bgFront.renderer.material.SetFloat("TimeFactor" , 0);
+			//Debug.LogError("Room up Step =" + upStep );
+			yield return new WaitForSeconds(upTimeStep3);
+			
+			upStep = 0;
+			timeFactor = 0.0f;
+			bgLeft.renderer.material.SetFloat("TimeFactor" , timeFactor);
+			bgFront.renderer.material.SetFloat("TimeFactor" , timeFactor);
+			setBGTexture( bgFront.renderer.material , bgFrontTextures[0] , bgFrontTextures[1] );
+			setBGTexture( bgLeft.renderer.material , bgLeftTextures[0] , bgLeftTextures[1] );
+
+
 			currentFloor += 1;
 
 			audio.Stop();
