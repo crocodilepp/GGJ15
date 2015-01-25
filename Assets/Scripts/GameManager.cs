@@ -33,6 +33,7 @@ namespace GoingUp
 		public AudioClip elevatorMovingSound;
 		public AudioClip atFloorDingSound;
 		public AudioClip footstepSound;
+		public AudioClip fallSound;
 		public GameObject screenMask;
 		
 		void Start () 
@@ -62,6 +63,7 @@ namespace GoingUp
 		public void HandleOnDeath()
 		{
 			gameOverText.SetActive(true);
+			audio.PlayOneShot(fallSound);
 		}
 
 		public void UpFloor()
