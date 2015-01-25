@@ -11,6 +11,30 @@ public class Player : Actor {
 	public FnOnDeath onDeath;
 	public FnOnDamage onDamage;
 
+	public AudioClip Suffocate;
+	public AudioClip Relief;
+	public AudioClip Fall;
+	private bool mIsBreathing = true;
+	public bool IsBreathing
+	{
+		set
+		{
+			if(mIsBreathing != value)
+			{
+				if(mIsBreathing)
+				{
+					audio.PlayOneShot(Suffocate);
+            	}
+				else
+				{
+					audio.PlayOneShot(Relief);
+				}
+			}
+			
+			mIsBreathing = value;
+		}
+	}
+
 	KeyCode keyType = KeyCode.Space;
 
 	public Slider hpSlider;
@@ -68,6 +92,8 @@ public class Player : Actor {
 	
 	public float takeDamage(float damage)
 	{		
+		if(hp <= 0) return 0;
+
 		hp -= damage;
 		if ( onDamage != null )
 		{
@@ -76,6 +102,7 @@ public class Player : Actor {
 		
 		if (hp <= 0) 
 		{
+			audio.PlayOneShot(Fall);
 			if(onDeath != null)
 			{
 				onDeath();
@@ -125,6 +152,14 @@ public class Player : Actor {
 
 	void Update () 
 	{
+		if (Input.GetKeyDown (KeyCode.F1)) 
+		{
+			initPlayerValue();
+			Debug.Log("ResetStartGame");
+	    }
+
+		if(hp <= 0) return;
+
 		ShowHpSlider();
 		ShowO2Slider();
 		if (!isBreathing ()) 
@@ -143,12 +178,6 @@ public class Player : Actor {
 //				takeDamage(hpLostSpeed * Time.deltaTime);
 			}
 		}
-		
-		if (Input.GetKeyDown (KeyCode.F1)) 
-		{
-			initPlayerValue();
-			Debug.Log("ResetStartGame");
-		}
 	}
 
 
@@ -160,17 +189,16 @@ public class Player : Actor {
 			onBreating = false;
 			Debug.Log ("Info Breathing(" + onBreating+")");
 		}
+		IsBreathing = onBreating;
 		return onBreating;
 	}
-
-	
 
 	public void effect( NPC npc )
 	{
 		switch (npc.gasType) 
 		{
 			case Gas.TypeA:
-				takeDamage(hpLostSpeed * Time.deltaTime);
+				takeDamage(hpLostSpeed * Time.deltaTime * 3);
 				break;
 			case Gas.TypeB:
 				takeDamage(hpLostSpeed * Time.deltaTime * -1.0f);
